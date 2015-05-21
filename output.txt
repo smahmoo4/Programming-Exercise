@@ -1,0 +1,20 @@
+TRAIN_LINE	 ROUTE_NAME	 RUN_NUMBER	 OPERATOR_ID
+Metra		Arlington Heights				CKeem
+Amtrak		Hiawatha		A005		LBeck
+Amtrak		Hiawatha		A006		LBeck
+Amtrak		Cleveland		A236		LJames
+Amtrak		Indianapolis		A317		ALuck
+Amtrak		St. Louis		A654		YMolina
+Amtrak		Detroit		A999		AWilson
+El		Brown Line		E102		SJones
+El		Addison		E108		SCastro
+El		Blue Line		E223		MHare
+El		Green Line		E312		GIsland
+El		Red Line		E432		LHill
+El		Sox 35th		E790		CSale
+Metra		Elgin		M289		EKingery
+Metra		UPN		M405		AJohnson
+Metra		Gary		M444		MJackson
+Metra		Oak Park		M559		EGesell
+Metra				M623		ESanders
+Trolley		Willis Tower		T666		JDoe
