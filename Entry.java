@@ -1,5 +1,4 @@
 //this class represents an Entry, or a row of information for the CSV file
-//REMOVE Duplicates!!!!!
 
 import java.util.Arrays;
 import java.lang.Comparable; 
@@ -108,16 +107,17 @@ public class Entry {
 		try {
 			bufferedReader = new BufferedReader(new FileReader(fileName));
 			
+			//read in the file
 			while ((line = bufferedReader.readLine()) != null) {
-				if(line.contains("TRAIN_LINE")) {
+				if(line.contains("TRAIN_LINE")) { //the first entry is the header so handled separately
 					y = line.split(",");
 					System.out.println("\t"+ y[0] + "\t" + y[1] + "\t" + y[2] + "\t" + y[3]);
 				}
 
-				else {
+				else { //convert each line of the CSV to an ArrayList<String>
 					ArrayList<String> list = CSVtoArrayList(line);
-					if(list.size() > 0) {
-						bigList.add(list);
+					if(list.size() > 0) {  //if its not null, i.e. empty entry -> ", , , " then do not add it
+						bigList.add(list); //ArrayList of ArrayList<String>, i.e. each element in bigList is an ArrayList
 					}
 				}
 			}
@@ -125,11 +125,11 @@ public class Entry {
 			createEntries(bigList);
 			
 			while(bigList.size() > 0) {
-				sortByRunNumber(bigList);
+				sortByRunNumber(bigList); 
 			}
 			
-			removeDuplicates(result);
-			displayResult(result);
+			removeDuplicates(result); //removes duplicate entries
+			displayResult(result); //displays result to console
 		}
 		
 		catch (IOException e) {
@@ -160,7 +160,7 @@ public class Entry {
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(y[0] + "\t" + y[1] + "\t" + y[2] + "\t" + y[3] + "\n");
 				
-				
+				// adding the result list to output.txt
 				for (int i = 0; i < result.size(); i++) {
 					trainData[0] = result.get(i).get(0).toString().replaceAll("[\\[\\]\\,]", "");
 					trainData[1] = result.get(i).get(1).toString().replaceAll("[\\[\\]\\,]", "");
@@ -188,7 +188,7 @@ public class Entry {
 	
 	public static ArrayList<String> CSVtoArrayList(String csv) {
 		ArrayList<String> result = new ArrayList<String>();
-		
+		//transforming each line of the csv file to an ArrayList<String>
 		if (csv != null) {
 			String[] splitData = csv.split("\\s*,\\s*");
 			for (int i = 0; i < splitData.length; i++) {
@@ -235,22 +235,22 @@ public class Entry {
 	public static void sortByRunNumber(ArrayList<ArrayList<String>> bList) {
 		String minNumber = bList.get(0).get(2);
 		int index = 0; 
-		
+		// get third element from inner list from each index of bList (the Run Number)
 		for(int i = 1; i < bList.size(); i++) {
 			if ((minNumber).compareTo(bList.get(i).get(2)) > 0) {
-				minNumber = bList.get(i).get(2);
+				minNumber = bList.get(i).get(2); //get the minimum number
 			}
 		}
-		
+		//find index of minimum Run Number in bList through helper function
 		index = indexOf(bList, minNumber);
 		//System.out.println("minNumber is: " + minNumber +", located at index: " + index);
 		
-		result.add(bList.get(index));
-		bList.remove(bList.get(index));
+		result.add(bList.get(index)); //add it to the result list...
+		bList.remove(bList.get(index)); //remove it from bList
 	}
 	
 	/*------------------------------------------------------*/
-
+	//helper function to get index of a particular String in the bigList
 	public static int indexOf(ArrayList<ArrayList<String>> aL, String x) {
 		int index = 0;
 		for (int i = 0; i < aL.size(); i++) {
@@ -263,7 +263,7 @@ public class Entry {
 	}
 	
 	/*------------------------------------------------------*/
-	
+	//prints the resulting train entry to console
 	public static void displayResult(ArrayList<ArrayList<String>> aL){
 		for(int i = 1; i < aL.size(); i++) {
 			System.out.println("[Entry " + i + "]: " + result.get(i));
@@ -271,7 +271,8 @@ public class Entry {
 	}
 	 
 	/*------------------------------------------------------*/
-	
+	//removes duplicate entries based on comparing the i-th and i+1-th index
+	//since the arrayList is now sorted it is easier to remove duplicates
 	public static void removeDuplicates(ArrayList<ArrayList<String>> aL) {
 		for (int i = 0; i < aL.size()-1; i++) {
 			if(aL.get(i).containsAll(aL.get(i+1))){
