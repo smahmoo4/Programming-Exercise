@@ -20,7 +20,7 @@ __________________________________
 	2. Execute CRUD Functionality
 		- NOTE: any input should be kept in CSV format,
 		- Example: “El, Blue Line, A000, JDoe” is accepted format.
-	3. perform any CRUD functionality before step 3. 
+	3. perform any CRUD functionality before step 4. 
 	4. open WellSpring.html in the browser
 	5. choose 'output.txt' as the file
 	
