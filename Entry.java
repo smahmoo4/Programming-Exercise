@@ -351,6 +351,7 @@ public class Entry {
 		String selection = comboBox(); //grabs selection from combo box
 		deleteFromCSV(selection); // deletes selection from csv file
 		JOptionPane.showMessageDialog(null, selection + " deleted!"); //outputs confirmation
+		letsCrud();
 	}
 
 /*****************************************************************/
